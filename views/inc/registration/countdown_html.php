@@ -13,6 +13,15 @@
 	                    </span>
 	                </div>
 	            </div>
+	            <div class="form-group">
+	            <label for="countdownImage">COUNTDOWN IMAGE</label>
+	                          
+	                <input type="text" name="msd-countdown-image" type="text" id="msd-new-media-image" value="<?php echo $msd_countdown_bg_image; ?>" /> 
+	                <div class="msd-new-countdown-button">	                 
+	               	 <a href="#" class="msd-open-media btn btn-danger" >Image</a>  
+               		</div>
+	            </div>	            
+
 	        </div>		 
 		
 		 </table>

@@ -8,14 +8,18 @@ function msd_countdown_functionality($attr, $content= null){
 
  while($myquery->have_posts()): $myquery->the_post();  
 
-     $msd_countdown_start  = get_post_meta(get_the_ID(), 'msd-countdown-date', true);  
+     $msd_countdown_start  = get_post_meta(get_the_ID(), 'msd-countdown-date', true);
+     $msd_countdown_bg_image  = get_post_meta(get_the_ID(), 'msd-countdown-image', true); 
+    
+
      //$msd_countdown_start  = get_posts('msd-countdown-date');  
      $msd_countdown_start = date("Y/m/d", strtotime($msd_countdown_start));
   
   
   $default = array(
-    'title'               => 'Insert Your Title',
-    'msd_countdown_start' => $msd_countdown_start
+    'title'                  => 'Insert Your Title',
+    'msd_countdown_start'    => $msd_countdown_start,
+    'msd_countdown_bg_image' => $msd_countdown_bg_image
     
   );
 
@@ -27,7 +31,8 @@ function msd_countdown_functionality($attr, $content= null){
   return '<div class="row">
                 <div class="col-md-12">
                     <div class="countdown-wrapper">
-                        <div class="countdown-wrap">                           
+                        <div class="countdown-wrap">    
+                          <img src="'.$msd_countdown_bg_image.'" />
                             <ul id="countdown" class="text-center">
                             <!-- days -->
                                 <li>

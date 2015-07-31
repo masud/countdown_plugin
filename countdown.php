@@ -18,8 +18,8 @@ require_once 'helper/views.php';
 
 
 add_action('init', function(){
-	require_once 'actions/countdown_action.php';
-	
+
+	require_once 'actions/countdown_action.php';	
 	require_once 'shortcode/countdown.php';
 
 
@@ -37,7 +37,6 @@ function msd_create_countdown_menu() {
 	  	'msd_countdown_settings_page',
 		'dashicons-admin-plugins'
 	);
-
 	
 
 }
@@ -53,7 +52,10 @@ function msd_countdown_settings_page(){
 	
 
 	$data['msd_countdown_event_start']  = $countdown_event_meta && $countdown_event_meta['msd-countdown-date'][0] ?
-								        $countdown_event_meta['msd-countdown-date'][0] : "";	
+                                          $countdown_event_meta['msd-countdown-date'][0] : "";  
+
+    $data['msd_countdown_bg_image']  = $countdown_event_meta && $countdown_event_meta['msd-countdown-image'][0] ?
+								          $countdown_event_meta['msd-countdown-image'][0] : "";	
 
 	//echo "<pre>";var_dump($data); die();
 
@@ -77,13 +79,16 @@ class MSD_COUNTDOWN
      */
 
     function msd_loadBackendScriptsCountdown(){
+    wp_enqueue_media();    
     
     wp_enqueue_script('MSD_COUNTDOWN_MOMENT_JS' ,'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js',array('jquery'));       
     wp_enqueue_script('MSD_COUNTDOWN_BOOTSTRAP_JS', plugins_url('assets/vendor/bootstrap/js/bootstrap.min.js', __FILE__), array('jquery'));  
 
     
     wp_enqueue_script('MSD_COUNTDOWN_DATETIME_JS', plugins_url('assets/vendor/bootstrapdatetime/js/bootstrap-datetimepicker.min.js', __FILE__), array('jquery'));  
-    wp_enqueue_script('MSD_COUNTDOWN_APP_JS', plugins_url('assets/js/app.js', __FILE__), array('jquery'));   
+    wp_enqueue_script('MSD_COUNTDOWN_APP_JS', plugins_url('assets/js/appback.js', __FILE__), array('jquery'));   
+
+
    
     wp_enqueue_style('MSD_COUNTDOWN_DATETIME_CSS' , plugins_url('assets/vendor/bootstrapdatetime/css/bootstrap-datetimepicker.min.css', __FILE__));     
     wp_enqueue_style('MSD_COUNTDOWN_BOOTSTRAP_CSS', plugins_url('assets/vendor/bootstrap/css/bootstrap.min.css', __FILE__));  
@@ -94,7 +99,7 @@ class MSD_COUNTDOWN
 
     function msd_loaOptinFontentScripts(){
 
-         $msd_countdown_id   = get_option(MSD_COUNTDOWN);  
+         $msd_countdown_id      = get_option(MSD_COUNTDOWN);  
          $msd_countdown_start   = get_post_meta($msd_countdown_id, 'msd-countdown-date', true);  
 
          // echo "<pre>";var_dump($msd_countdown_start); die();
@@ -104,7 +109,7 @@ class MSD_COUNTDOWN
 
       
 
-        wp_enqueue_style( '-MSD_COUNTDOWN_FONT_STYLE_CSS', plugins_url('assets/css/style.css', __FILE__), array());    
+        wp_enqueue_style('-MSD_COUNTDOWN_FONT_STYLE_CSS', plugins_url('assets/css/style.css', __FILE__), array());    
         wp_enqueue_style('MSD_COUNTDOWN_DATETIME_CSS' , plugins_url('assets/vendor/bootstrapdatetime/css/bootstrap-datetimepicker.min.css', __FILE__));     
   
         
